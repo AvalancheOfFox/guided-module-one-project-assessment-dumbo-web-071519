@@ -1,7 +1,7 @@
 module Find_By 
  def find_tutor(name)
    tutor = Tutor.all.find{|tutor| tutor.name == name}
-    puts "You have sought out #{tutor.name}"
+    # puts "You have sought out #{tutor.name}"
 
  end
 
