@@ -3,7 +3,15 @@ class Student < ActiveRecord::Base
     has_many :lessons
     has_many :tutors, through: :lessons
 
-    def self.new_user_setup
+    def name_validator    #not used anywhere yet but would standardize our names as Capitalized and all letters
+        prompt.ask("What is your name?") do |q|
+        q.required true
+        q.validate /\A\w+\Z/
+        q.modify   :capitalize
+    end
+    end
+
+    def self.new_user_setup #can be refactored with prompt.ask statments
         puts "What is your name my Seeker of Knowledge?"
         name = gets.chomp
         puts "And of what grade are you?"

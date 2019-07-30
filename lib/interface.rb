@@ -17,7 +17,8 @@ class Interface
 
     def second_menu(student_object)
         # binding.pry
-        prompt.select("Welcome back #{student_object.name}. What do you wish to do today?") do |menu|
+        
+    chosen_option = prompt.select("Welcome back #{student_object.name}. What do you wish to do today?") do |menu|
             menu.choice  "Search By Name" , -> { puts "Please enter a tutor's name to search for:"
             name = gets.chomp
             student_object.find_tutor(name) }
@@ -26,7 +27,9 @@ class Interface
             menu.choice  "Cancel A Session" , -> {} 
             menu.choice  "Change My Knowledge Sought" , -> {} 
             menu.choice  "Delete My Account" , -> {} 
-            
+            menu.choice  "Exit Program" , -> {return "Exit"} 
+        end
+          
             # when choice 4
             #     #conditional  will cancel an existing session
             # when choice 5
@@ -34,7 +37,6 @@ class Interface
             # when choice 6
             #     #conditional delete my account 
             
-        end
     end
     
     def help_me_book(student_obj)
