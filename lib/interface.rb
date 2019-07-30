@@ -6,6 +6,7 @@ class Interface
     end
 
     def welcome
+        
         puts "🔮  Welcome to Studify, my diligent pupil 🔮"
         prompt.select("Are you looking for tutoring young one? Or have you already a tutor?") do |menu|
             menu.choice "New Student", -> {self.new_user_setup}
@@ -27,19 +28,17 @@ class Interface
         end
 
     def second_menu(student_object)
-    binding.pry
+    # binding.pry
     chosen_option = prompt.select("Welcome back #{student_object.name}. What do you wish to do today?") do |menu|
            
-        menu.choice  "Search By Name" , -> { puts "Please enter a tutor's name to search for:"
-            name = gets.chomp
-            return student_object.find_tutor(name) }
+            menu.choice  "Search By Name" , -> { student_object.find_tutor }
 
             menu.choice  "See Tutors Near Your Location" , -> { return student_object.find_obj_by_location.select{|t| t.name} } 
 
             menu.choice  "Book A New Lesson" , -> {help_me_book(student_object)} #creates new lesson instance
 
             menu.choice  "Cancel A Session" , -> {cancel_lesson(student_object)} #cancels the most recently created lesson
-            menu.choice  "Change My Knowledge Sought" , -> {} 
+            menu.choice  "Change My Knowledge Sought" , -> {student_object.change_subject} #changes the student instance's subject 
             menu.choice  "Delete My Account" , -> {delete_account(student_object)} #deletes the user account and exits the program
             menu.choice  "Exit Program" , -> {return "Exit"} 
         end
@@ -65,7 +64,7 @@ class Interface
 
     def delete_account(student_obj) #deletes the student obj
         the_chosen_one = Student.all.select{|stud| stud == student_obj}
-        the_chosen_one.destroy
+        the_chosen_one[0].destroy
         return "Exit"
     end
 

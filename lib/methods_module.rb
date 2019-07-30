@@ -1,8 +1,11 @@
 module Find_By 
- def find_tutor(name)
-   tutor = Tutor.all.find{|tutor| tutor.name == name}
+ def find_tutor
+    puts "Please enter a tutor's name to search for:"
+    name = gets.chomp
+    tutor = Tutor.all.find{|tutor| tutor.name == name}
     # puts "You have sought out #{tutor.name}"
     #returns whole tutor instance with matching name
+    puts "Seeker by name of #{self.name}, we have found a tutor near you. Meet #{tutor.name}. They are an educator of #{tutor.field}. Learn well."
  end
 
   def find_student(name)
@@ -20,7 +23,7 @@ module Find_By
     end
 
     def find_obj_by_location #gets back tutor objs with matched location to the student instance location.  
-        
+        binding.pry
         self.opposite_class_Selector.select{|opp| opp.location == self.location }
     end
 
