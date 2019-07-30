@@ -2,7 +2,7 @@ module Find_By
  def find_tutor(name)
    tutor = Tutor.all.find{|tutor| tutor.name == name}
     # puts "You have sought out #{tutor.name}"
-
+    #returns whole tutor instance with matching name
  end
 
   def find_student(name)
@@ -19,12 +19,13 @@ module Find_By
         end
     end
 
-    def find_obj_by_location
+    def find_obj_by_location #gets back tutor objs with matched location to the student instance location.  
+        
         self.opposite_class_Selector.select{|opp| opp.location == self.location }
     end
 
-  def find_by_location  #matches our location on whoever called on for their opposite i.e fed a student, returns a tutor/s as an array of strings
-    tutor_array = self.opposite_class_Selector.select{|opp| opp.location == self.location }
+  def tutor_name_by_location  #returns a string of tutor names i.e fed a student, returns a tutor/s as an array of strings
+    tutor_array = self.find_obj_by_location
     t_name_arr = tutor_array.map{|t| t.name}  
     puts "The tutors near your location are #{t_name_arr.map{|t| t.name}.join(" & ")}."
   end
