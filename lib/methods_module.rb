@@ -1,6 +1,8 @@
 module Find_By 
  def find_tutor(name)
-    Tutor.all.find{|tutor| tutor.name == name}
+   tutor = Tutor.all.find{|tutor| tutor.name == name}
+    puts "You have sought out #{tutor.name}"
+
  end
 
   def find_student(name)
@@ -17,8 +19,14 @@ module Find_By
         end
     end
 
-  def find_by_location  #matches our location on whoever called on for their opposite i.e fed a student, returns a tutor/s
-    self.opposite_class_Selector.select{|opp| opp.location == self.location }
+    def find_obj_by_location
+        self.opposite_class_Selector.select{|opp| opp.location == self.location }
+    end
+
+  def find_by_location  #matches our location on whoever called on for their opposite i.e fed a student, returns a tutor/s as an array of strings
+    tutor_array = self.opposite_class_Selector.select{|opp| opp.location == self.location }
+    t_name_arr = tutor_array.map{|t| t.name}  
+    puts "The tutors near your location are #{t_name_arr.map{|t| t.name}.join(" & ")}."
   end
 
   def find_by_subject  #checks for self subject offered to teach or subject tutoring wanted, and returns matches from the opposite class 
