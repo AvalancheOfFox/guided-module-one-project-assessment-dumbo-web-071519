@@ -15,8 +15,12 @@ class Student < ActiveRecord::Base
     end
 
     def change_subject
-        self.subject =  prompt.ask("What is your newest intellectual pursuit?", default: "The Dark Arts")
+        puts "What is your newest intellectual pursuit?"
+        self.subject =  gets.chomp
+        puts "Your new subject is : #{self.subject}."
     end
+
+    
 end
 
     # def name_validator    #not used anywhere yet but would standardize our names as Capitalized and all letters

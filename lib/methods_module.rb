@@ -6,6 +6,7 @@ module Find_By
     # puts "You have sought out #{tutor.name}"
     #returns whole tutor instance with matching name
     puts "Seeker by name of #{self.name}, we have found a tutor near you. Meet #{tutor.name}. They are an educator of #{tutor.field}. Learn well."
+    sleep(1)
  end
 
   def find_student(name)
@@ -23,18 +24,22 @@ module Find_By
     end
 
     def find_obj_by_location #gets back tutor objs with matched location to the student instance location.  
-        binding.pry
+        # binding.pry
         self.opposite_class_Selector.select{|opp| opp.location == self.location }
+        sleep(1)
     end
 
   def tutor_name_by_location  #returns a string of tutor names i.e fed a student, returns a tutor/s as an array of strings
-    tutor_array = self.find_obj_by_location
-    t_name_arr = tutor_array.map{|t| t.name}  
-    puts "The tutors near your location are #{t_name_arr.map{|t| t.name}.join(" & ")}."
+    tutor_array = find_obj_by_location
+    t_name_arr = tutor_array.map{|t| t.name} 
+    t_strings = t_name_arr.join(" & ") 
+    puts "The tutors near your location are #{t_strings}."
+    sleep(1)
   end
 
   def find_by_subject  #checks for self subject offered to teach or subject tutoring wanted, and returns matches from the opposite class 
-     self.attributes.has_key?("field") ? (self.opposite_class_Selector.select{|opp| opp.subject == self.field}) : (self.opposite_class_Selector.select{|opp| opp.field == self.subject})    
+     self.attributes.has_key?("field") ? (self.opposite_class_Selector.select{|opp| opp.subject == self.field}) : (self.opposite_class_Selector.select{|opp| opp.field == self.subject}) 
+     sleep(1)   
   end
   
   

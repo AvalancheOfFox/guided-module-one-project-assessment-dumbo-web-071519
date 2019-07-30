@@ -8,5 +8,5 @@ while choice != "Exit"
     choice = cli.second_menu(user_object)
 end
 
-# binding.pry
+binding.pry
 puts "Goodbye CRuel World"
