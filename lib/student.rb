@@ -11,21 +11,6 @@ class Student < ActiveRecord::Base
     end
     end
 
-    def self.new_user_setup #can be refactored with prompt.ask statments
-        puts "What is your name my Seeker of Knowledge?"
-        name = gets.chomp
-        puts "And of what grade are you?"
-        grade = gets.chomp
-        puts "In what subject do wish to receive instruction?"
-        subject = gets.chomp
-        puts "And where on the Earthly plane are you located?"
-        location = gets.chomp
-        new_student = Student.create(:name => name, :grade => grade, :subject => subject, :location => location)
-        puts "Welcome to Studify where we bring you from the dark, cold of ignorance into the warmth of knowledge."
-        Interface.second_menu(new_student)
-        #returns the new student we create (implicit)
-    end
-
     def self.returning_user_handler
         puts "What is your name?"
         name = gets.chomp

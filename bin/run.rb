@@ -7,5 +7,6 @@ choice = cli.second_menu(user_object)
 while choice != "Exit"
     choice = cli.second_menu(user_object)
 end
+
 binding.pry
 puts "hello world"
