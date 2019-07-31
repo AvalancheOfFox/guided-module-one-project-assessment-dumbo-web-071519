@@ -33,9 +33,13 @@ module Find_By
     # binding.pry
     tutor_array = find_obj_by_location
     t_name_arr = tutor_array.map{|t| t.name} 
-    t_strings = t_name_arr.join(" & ") 
-    puts "The tutors near your location are #{t_strings}."
-    sleep(1)
+    if t_name_arr.empty?
+      puts "I feel your pain my pupil!! There are no tutors near you flesh prison location!"
+    else
+        t_strings = t_name_arr.join(" & ") 
+        puts "The tutors near your location are #{t_strings}."
+    end
+      sleep(1)
   end
 
   def find_by_subject  #checks for self subject offered to teach or subject tutoring wanted, and returns matches from the opposite class 
