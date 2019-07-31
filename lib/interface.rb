@@ -41,8 +41,14 @@ class Interface
         location = prompt.ask("Where is your flesh prison located?", required: true)
         puts "Welcome to Studify where we bring you from the dark, cold of ignorance into the warmth of knowledge."
         new_stud = Student.create(:name => name, :grade => grade, :subject => subject, :location => location)
-       
-        #returns the new student we create (implicit)
+       sleep(2)
+       puts "🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥"
+       puts " __    ___  ____    ____  _  _  ___  ___   ___    ___  ___    __    __  __  _  _  ____
+              (  )  (  )(  )  (  )( )( )(  )(  ,) (  )  (  ,)(  )  (  )  (  )/ )( )( )(  _)
+              )(__  ) _)  )(      )(   )__(  ) ) )  \  ) )   ) ,\ ) _)   )(__  )(( (/\ )__(   )(
+              (____)(___) (__)    (__) ()()(___)()\)(___)  (___/(___)  (____)(__)\__/()() (__) "
+       sleep(1.5) 
+       #returns the new student we create (implicit)
         end
 
     def second_menu(student_object)
