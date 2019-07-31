@@ -5,8 +5,8 @@ module Find_By
     tutor = Tutor.all.find{|tutor| tutor.name == name}
     # puts "You have sought out #{tutor.name}"
     #returns whole tutor instance with matching name
-    puts "Seeker by name of #{self.name}, we have found a tutor near you. Meet #{tutor.name}. They are an educator of #{tutor.field}. Learn well."
-    sleep(1)
+    tutor ? (puts "Seeker by name of #{self.name}, we have found a tutor near you. Meet #{tutor.name}. They are an educator of #{tutor.field}. Learn well.") : (puts "Sorry #{name} is not a tutor on our roster")
+    sleep(3)
  end
 
   def find_student(name)
