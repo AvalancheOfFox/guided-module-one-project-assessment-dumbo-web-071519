@@ -36,11 +36,15 @@ class Interface
             system "clear"
             
         name = prompt.ask("What is your name my Seeker of Knowledge?", default: 'Anonymous', required: true)
-        grade = prompt.ask("And of what grade are you?", required: true)
+        # grade = prompt.ask("And of what grade are you?", validate: /^([1-9]|1[012])$/ )
+        grade = prompt.ask("And of what grade are you?") do |q|
+            q.validate(/^([1-9]|1[012])$/, 'Please stop attempting to meddle with magic beyond your comprehension. Enter your true skill or grade level:')
+        end
         subject = prompt.ask("In what subject do you require instruction?", required: true)
         location = prompt.ask("Where is your flesh prison located?", required: true)
         puts "Welcome to Studify where we bring you from the dark, cold of ignorance into the warmth of knowledge."
         new_stud = Student.create(:name => name, :grade => grade, :subject => subject, :location => location)
+
        sleep(2)
        puts "🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥"
        puts " __    ___  ____    ____  _  _  ___  ___   ___    ___  ___    __    __  __  _  _  ____
@@ -49,6 +53,7 @@ class Interface
               (____)(___) (__)    (__) ()()(___)()\)(___)  (___/(___)  (____)(__)\__/()() (__) "
        sleep(1.5) 
        #returns the new student we create (implicit)
+
         end
 
     def second_menu(student_object)
@@ -114,6 +119,7 @@ class Interface
             the_chosen_one = Student.all.select{|stud| stud == student_obj}
             the_chosen_one[0].destroy
             puts "  💀  Your account has been deleted  💀  "
+            sleep (3)
         else 
             return "Exit"
         end
