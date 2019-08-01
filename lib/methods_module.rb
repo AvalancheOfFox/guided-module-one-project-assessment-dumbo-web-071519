@@ -6,7 +6,7 @@ module Find_By
     # puts "You have sought out #{tutor.name}"
     #returns whole tutor instance with matching name
     tutor ? (puts "Seeker by name of #{self.name}, we have found a tutor near you. Meet #{tutor.name}. They are an educator of #{tutor.field}. Learn well.") : (puts "Sorry #{name} is not a tutor on our roster")
-    sleep(3)
+    sleep(1.6)
  end
 
   def find_student(name)
@@ -34,17 +34,17 @@ module Find_By
     tutor_array = find_obj_by_location
     t_name_arr = tutor_array.map{|t| t.name} 
     if t_name_arr.empty?
-      puts "I feel your pain my pupil!! There are no tutors near you flesh prison location!"
+      puts "I feel your pain my pupil!! There are no tutors near your flesh prison location!"
     else
         t_strings = t_name_arr.join(" & ") 
         puts "The tutors near your location are #{t_strings}."
     end
-      sleep(1)
+      sleep(1.6)
   end
 
   def find_by_subject  #checks for self subject offered to teach or subject tutoring wanted, and returns matches from the opposite class 
      self.attributes.has_key?("field") ? (self.opposite_class_Selector.select{|opp| opp.subject == self.field}) : (self.opposite_class_Selector.select{|opp| opp.field == self.subject}) 
-     sleep(1)   
+     sleep(1.6)   
   end
   
   

@@ -23,7 +23,7 @@ class Interface
                                                                    
         puts  "🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚"                                                                                                                       
         puts "         🔮  Welcome to Studify, my diligent pupil 🔮"
-        sleep(1.5)
+        sleep(1.6)
         prompt.select("Are you looking for tutoring young one? Or have you already joined us in our quest for knowledge?") do |menu|
             menu.choice "New Student", -> {self.new_user_setup}
             menu.choice "Returning Student", -> {Student.returning_user_handler}
@@ -45,19 +45,19 @@ class Interface
         puts "Welcome to Studify where we bring you from the dark, cold of ignorance into the warmth of knowledge."
         new_stud = Student.create(:name => name, :grade => grade, :subject => subject, :location => location)
 
-       sleep(2)
-       puts "🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥"
-       puts " __    ___  ____    ____  _  _  ___  ___   ___    ___  ___    __    __  __  _  _  ____
-              (  )  (  )(  )  (  )( )( )(  )(  ,) (  )  (  ,)(  )  (  )  (  )/ )( )( )(  _)
-              )(__  ) _)  )(      )(   )__(  ) ) )  \  ) )   ) ,\ ) _)   )(__  )(( (/\ )__(   )(
-              (____)(___) (__)    (__) ()()(___)()\)(___)  (___/(___)  (____)(__)\__/()() (__) "
-       sleep(1.5) 
+    #    sleep(1.6)
+    #    puts "🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥📚🔥"
+    #    puts " __    ___  ____    ____  _  _  ___  ___   ___    ___  ___    __    __  __  _  _  ____
+    #           (  )  (  )(  )  (  )( )( )(  )(  ,) (  )  (  ,)(  )  (  )  (  )/ )( )( )(  _)
+    #           )(__  ) _)  )(      )(   )__(  ) ) )  \  ) )   ) ,\ ) _)   )(__  )(( (/\ )__(   )(
+    #           (____)(___) (__)    (__) ()()(___)()\)(___)  (___/(___)  (____)(__)\__/()() (__) "
+    #    sleep(1.6) 
        #returns the new student we create (implicit)
 
         end
 
     def second_menu(student_object)
-    sleep(0.5)
+    sleep(1.5)
     system "clear"
     
     chosen_option = prompt.select("Welcome back #{student_object.name}. What do you wish to do today?") do |menu|
@@ -80,7 +80,11 @@ class Interface
     
     def help_me_book(student_obj)
         system "clear"
-        
+        # binding.pry
+        if student_obj.find_obj_by_location.empty? == true 
+            puts "Sorry there are no tutors in your area!"
+            second_menu(student_obj)
+        else
         chosen_tutor_str = prompt.select("Which tutor would you like to book with?", student_obj.find_obj_by_location.map{|x| x.name})
         chosen_tutor_obj = student_obj.find_obj_by_location.select{|y| y.name == chosen_tutor_str}
         # chosen_tutor = my_tutors_obj.find{|tutor_object| tutor_object.name == chosen_tutor}
@@ -92,6 +96,7 @@ class Interface
         new_lesson = Lesson.create(:student_id => student_obj.id, :tutor_id => chosen_tutor_obj[0].id, :time => time, :location => student_obj.location, :subject => student_obj.subject )
         puts "A lesson has been created between you and #{new_lesson.tutor.name} at #{new_lesson.time} in #{new_lesson.location}. Be sure to bring your #{new_lesson.subject} textbook."
         #return will be a new lesson being initialized and success measured by statement at the end
+        end
     end
 
     def see_my_lessons(object)
@@ -101,15 +106,20 @@ class Interface
         tutor_name_strs = tutor_ids_arr.map{|x| Tutor.all.find(x).name}
          time_arr = lesson_inst_arr.map{|lesson| lesson.time}.uniq
          puts "You have booked #{lesson_inst_arr.length} lessons through Studify with #{tutor_name_strs.join(" & ")} the tutors, at #{time_arr.join(" & ")} oclocks."
-         sleep(2)
+         sleep(1.6)
     end
 
     def cancel_lesson(student_obj) #cancels last created session
         system "clear"
         
         lessons_arr = Lesson.all.select{|lesson| lesson.student_id == student_obj.id}
+        if lessons_arr.empty? == true
+            puts "You have no lessons to delete."
+            second_menu(student_obj)
+        else
         puts "Your most recently created lesson has now been cancelled."
         lessons_arr.last.destroy
+        end
     end
 
     def delete_account(student_obj) #deletes the student obj
@@ -119,7 +129,7 @@ class Interface
             the_chosen_one = Student.all.select{|stud| stud == student_obj}
             the_chosen_one[0].destroy
             puts "  💀  Your account has been deleted  💀  "
-            sleep (3)
+            sleep (1.6)
         else 
             return "Exit"
         end
