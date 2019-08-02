@@ -80,7 +80,6 @@ class Interface
     
     def help_me_book(student_obj)
         system "clear"
-        # binding.pry
         if student_obj.find_obj_by_location.empty? == true 
             puts "Sorry there are no tutors in your area!"
             second_menu(student_obj)
@@ -102,7 +101,6 @@ class Interface
     def see_my_lessons(object)
         lesson_inst_arr = object.lessons
         tutor_ids_arr =lesson_inst_arr.map{|lesson| lesson.tutor_id}.uniq
-        # binding.pry
         tutor_name_strs = tutor_ids_arr.map{|x| Tutor.all.find(x).name}
          time_arr = lesson_inst_arr.map{|lesson| lesson.time}.uniq
          puts "You have booked #{lesson_inst_arr.length} lessons through Studify with #{tutor_name_strs.join(" & ")} the tutors, at #{time_arr.join(" & ")} oclocks."

@@ -24,13 +24,11 @@ module Find_By
     end
 
     def find_obj_by_location #gets back tutor objs with matched location to the student instance location.  
-        # binding.pry
         self.opposite_class_Selector.select{|opp| opp.location == self.location }
         
     end
 
   def tutor_name_by_location  #returns a string of tutor names i.e fed a student, returns a tutor/s as an array of strings
-    # binding.pry
     tutor_array = find_obj_by_location
     t_name_arr = tutor_array.map{|t| t.name} 
     if t_name_arr.empty?
